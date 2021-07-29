@@ -1,0 +1,7 @@
+const INN_LENGTH = 10
+const DEFAULT_ORGANIZATION_TIMEZONE = 'Europe/Moscow'
+
+module.exports = {
+    INN_LENGTH,
+    DEFAULT_ORGANIZATION_TIMEZONE,
+}

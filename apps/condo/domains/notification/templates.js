@@ -1,0 +1,124 @@
+const conf = require('@core/config')
+const { RU_LOCALE, EN_LOCALE } = require('@condo/domains/common/constants/locale')
+
+const { 
+    INVITE_NEW_EMPLOYEE_MESSAGE_TYPE,
+    DIRTY_INVITE_NEW_EMPLOYEE_MESSAGE_TYPE,
+    MESSAGE_TRANSPORTS, 
+    REGISTER_NEW_USER_MESSAGE_TYPE, 
+    RESET_PASSWORD_MESSAGE_TYPE,
+    SMS_VERIFY_CODE_MESSAGE_TYPE,
+} = require('./constants')
+
+async function renderTemplate (transport, message) {
+    if (!MESSAGE_TRANSPORTS.includes(transport)) throw new Error('unexpected transport argument')
+
+    // TODO(pahaz): we need to decide where to store templates! HArDCODE!
+    // TODO(pahaz): write the logic here!
+    //  1) we should find message template by TYPE + LANG
+    //  2) we should render the template and return transport context
+
+    const serverUrl = conf.SERVER_URL
+
+    if (message.type === INVITE_NEW_EMPLOYEE_MESSAGE_TYPE) {
+        const { organizationName, inviteCode } = message.meta
+
+        if (message.lang === EN_LOCALE) {
+            return {
+                subject: 'You are invited to join organization as employee',
+                text: `Organization "${organizationName}" invited you as employee.\n` +
+                    `Click to the link to join: ${serverUrl}/auth/invite/${inviteCode}`,
+            }
+        } else if (message.lang === RU_LOCALE) {
+            return {
+                subject: 'Вас пригласили присоединиться к организации в качестве сотрудника',
+                text: `Администратор организации "${organizationName}" приглашает вас в качестве сотрудника.\n` +
+                    `Перейдите по ссылке, чтобы присоединиться: ${serverUrl}/auth/invite/${inviteCode}`,
+            }
+        }
+    }
+
+    if (message.type === DIRTY_INVITE_NEW_EMPLOYEE_MESSAGE_TYPE) {
+        const { organizationName } = message.meta
+
+        if (message.lang === EN_LOCALE) {
+            return {
+                subject: 'You are invited to join organization as employee',
+                text: `Organization "${organizationName}" invited you as employee.\n` +
+                    `Click to the link to join: ${serverUrl}/auth/signin`,
+            }
+        } else if (message.lang === RU_LOCALE) {
+            return {
+                subject: 'Вас пригласили присоединиться к организации в качестве сотрудника',
+                text: `Администратор организации "${organizationName}" приглашает вас в качестве сотрудника.\n` +
+                    `Перейдите по ссылке, чтобы присоединиться: ${serverUrl}/auth/signin`,
+            }
+        }
+    }
+
+    if (message.type === REGISTER_NEW_USER_MESSAGE_TYPE) {
+        const { userPhone, userPassword } = message.meta
+
+        if (message.lang === EN_LOCALE) {
+            return {
+                subject: 'Your access data to doma.ai service.',
+                text: `
+                    Phone: ${userPhone}
+                    Password: ${userPassword}
+                    
+                    Please follow link: ${serverUrl}/auth/signin
+                `,
+            }
+        } else if (message.lang === RU_LOCALE) {
+            return {
+                subject: 'Ваши данные для доступа к сервису doma.ai.',
+                text: `
+                    Номер телефона: ${userPhone}
+                    Пароль: ${userPassword}
+                    
+                    Ссылка для авторизации: ${serverUrl}/auth/signin 
+                `,
+            }
+        }
+    }
+
+    if (message.type === RESET_PASSWORD_MESSAGE_TYPE) {
+        const { token } = message.meta
+
+        if (message.lang === 'en') {
+            return {
+                subject: 'You are trying to reset password',
+                text:  `Click to the link to set new password: ${serverUrl}/auth/change-password?token=${token}`,
+            }
+        } else if (message.lang === 'ru') {
+            return {
+                subject: 'Восстановление пароля',
+                text: `
+                    Добрый день! \n
+                    Чтобы задать новый пароль к платформе Doma.ai, вам просто нужно перейти по сслыке.\n
+                    ${serverUrl}/auth/change-password?token=${token}
+                `,
+            }
+        }
+    }
+        
+    if (message.type === SMS_VERIFY_CODE_MESSAGE_TYPE) {
+        const { smsCode } = message.meta
+        if (message.lang === 'en') {
+            return {
+                subject: 'Verify code',
+                text: `Code: ${smsCode}`,
+            }
+        } else if (message.lang === 'ru') {
+            return {
+                subject: 'Код',
+                text: `Код: ${smsCode}`,
+            }
+        }
+    }
+    throw new Error('unknown template or lang')
+}
+
+module.exports = {
+    renderTemplate,
+}
