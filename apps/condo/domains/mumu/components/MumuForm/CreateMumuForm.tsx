@@ -13,7 +13,7 @@ export const CreateMumuForm: React.FC = () => {
 
     const action = Mumu.useCreate({},
         () => {
-            router.push('/mumu/create')
+            router.push('/mumu')
         })
 
     return (
