@@ -10,7 +10,7 @@ import { generateReactHooks } from '@condo/domains/common/utils/codegeneration/g
 import { Mumu as MumuGQL } from '@condo/domains/mumu/gql'
 import { Mumu, MumuUpdateInput, QueryAllMumusArgs } from '../../../../schema'
 
-const FIELDS = ['id', 'deletedAt', 'createdAt', 'updatedAt', 'createdBy', 'updatedBy', 'name', 'isWorked']
+const FIELDS = ['id', 'name', 'isWorked']
 const RELATIONS = []
 
 export interface IMumuUIState extends Mumu {
