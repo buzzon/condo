@@ -22,6 +22,7 @@ import { useTableColumns } from '@condo/domains/ticket/hooks/useTableColumns'
 import { useEmergencySearch } from '@condo/domains/ticket/hooks/useEmergencySearch'
 import { useSearch } from '@condo/domains/common/hooks/useSearch'
 import { TitleHeaderAction } from '@condo/domains/common/components/HeaderActions'
+import { Mumu } from '../../domains/mumu/utils/clientSchema'
 
 interface IPageWithHeaderAction extends React.FC {
     headerAction?: JSX.Element
@@ -53,22 +54,38 @@ const TicketsPage: IPageWithHeaderAction = () => {
         loading,
         count: total,
         objs: tickets,
-    } = Ticket.useObjects({
-        where,
-        skip: (offsetFromQuery * pagesizeFromQuey) - pagesizeFromQuey,
-        first: pagesizeFromQuey,
+    } = Mumu.useObjects({
+        where
     }, {
         fetchPolicy: 'network-only',
     })
 
 
     const [filtersApplied, setFiltersApplied] = useState(false)
-    const tableColumns = useTableColumns(sortFromQuery, filtersFromQuery, setFiltersApplied)
+    // const tableColumns = useTableColumns(sortFromQuery, filtersFromQuery, setFiltersApplied)
+    const tableColumns = [        
+        {
+          title: 'Id',
+          dataIndex: 'id',
+          key: 'id',
+        },
+        {
+          title: 'Name',
+          dataIndex: 'name',
+          key: 'name',
+        },
+        {
+          title: 'isWorked',
+          dataIndex: 'isWorked',
+          key: 'isWorked',
+          render: text => <p>{text ? '✔️' :'❌'}</p>,
+        }
+      ];
 
     const handleRowAction = useCallback((record) => {
         return {
             onClick: () => {
-                router.push(`/ticket/${record.id}/`)
+                router.push(`/mumu/${record.id}/`)
             },
         }
     }, [])
@@ -147,13 +164,6 @@ const TicketsPage: IPageWithHeaderAction = () => {
                                             onRow={handleRowAction}
                                             onChange={handleTableChange}
                                             rowKey={record => record.id}
-                                            pagination={{
-                                                showSizeChanger: false,
-                                                total,
-                                                current: offsetFromQuery,
-                                                pageSize: pagesizeFromQuey,
-                                                position: ['bottomLeft'],
-                                            }}
                                         />
                                     </Col>
                                 </Row>
