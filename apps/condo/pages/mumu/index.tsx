@@ -60,10 +60,10 @@ const MumuIndexPage: React.FC = () => {
                     {
                         !mumus.length
                             ?< EmptyListView
-                                label='Empty List Label'
-                                message='Empty List Message'
+                                label={'Empty ' + name + ' Label'}
+                                message={'Empty '+ name +' Message'}
                                 createRoute='/mumu/create'
-                                createLabel='Create Mumu'      
+                                createLabel={'Create ' + name + 's'}      
                             />
                             :
                             <Row gutter={[0, 40]} align={'middle'}>
