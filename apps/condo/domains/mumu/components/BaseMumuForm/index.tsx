@@ -20,10 +20,6 @@ interface IMumuFormProps {
 
 export const BaseMumuForm: React.FC<IMumuFormProps>  = (props) => {
     
-    // const [selectedPropertyId, setSelectedPropertyId] = useState(get(initialValues, 'property'))
-    // const { loading, obj: property } = useObject({ where: { id: selectedPropertyId ? selectedPropertyId : null } })
-
-
     const { action: _action, initialValues, afterActionCompleted } = props
     console.log(initialValues);
 
