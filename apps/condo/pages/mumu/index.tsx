@@ -2,7 +2,6 @@
 import { css, jsx } from '@emotion/core'
 import { PageContent, PageHeader, PageWrapper } from '@condo/domains/common/components/containers/BaseLayout'
 import { OrganizationRequired } from '@condo/domains/organization/components/OrganizationRequired'
-import { Ticket } from '@condo/domains/ticket/utils/clientSchema'
 import {
     filtersToQuery,
     getPageIndexFromQuery,
@@ -11,7 +10,7 @@ import {
 } from '@condo/domains/ticket/utils/helpers'
 import { getFiltersFromQuery } from '@condo/domains/common/utils/helpers'
 import { IFilters } from '@condo/domains/ticket/utils/helpers'
-import { Col, Input, Row, Table, Typography, Checkbox } from 'antd'
+import { Col, Input, Row, Table, Typography, Checkbox, Button } from 'antd'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import qs from 'qs'
@@ -48,7 +47,7 @@ const TicketsPage: IPageWithHeaderAction = () => {
     const pagesizeFromQuey: number = getPageSizeFromQuery(router.query)
 
     const where = { ...router.query}
-
+    const sortBy = sortFromQuery.length > 0  ? sortFromQuery : 'createdAt_DESC' 
     const {
         fetchMore,
         loading,
@@ -136,7 +135,7 @@ const TicketsPage: IPageWithHeaderAction = () => {
                                 ? <EmptyListView
                                     label={EmptyListLabel}
                                     message={EmptyListMessage}
-                                    createRoute='/ticket/create'
+                                    createRoute='/mumu/create'
                                     createLabel={CreateTicket} />
                                 : <Row gutter={[0, 40]} align={'middle'}>
                                     <Col span={6}>
@@ -165,6 +164,11 @@ const TicketsPage: IPageWithHeaderAction = () => {
                                             onChange={handleTableChange}
                                             rowKey={record => record.id}
                                         />
+                                    </Col>
+                                    <Col>
+                                        <Button type='primary' style={{ marginTop: '16px' }} onClick={() => router.push('/mumu/create')}>
+                                            Create mumu
+                                        </Button>
                                     </Col>
                                 </Row>
                         }
