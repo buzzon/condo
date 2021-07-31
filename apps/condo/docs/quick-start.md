@@ -36,11 +36,17 @@ sudo apt install python3-pip
 pip install "Django>=3.0.6"
 pip install "psycopg2-binary>=2.8.5"
 
-docker-compose up -d postgresdb redis
+sudo docker-compose up -d postgresdb redis
 npm install node-jq --save
 yarn
 yarn workspace @app/condo makemigrations
 yarn workspace @app/condo migrate
+yarn workspace @app/condo dev
+```
+
+### second start
+```shel
+sudo docker-compose up -d postgresdb redis
 yarn workspace @app/condo dev
 ```
 
