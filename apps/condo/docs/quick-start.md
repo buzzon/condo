@@ -27,6 +27,29 @@ DOCKER_COMPOSE_SERVER_URL=http://localhost:3003
 ENDOFFILE
 ```
 
+### fast start
+```shel
+sudo apt-get install autoconf
+sudo apt-get install libtool
+
+sudo apt install python3-pip
+pip install "Django>=3.0.6"
+pip install "psycopg2-binary>=2.8.5"
+
+sudo docker-compose up -d postgresdb redis
+npm install node-jq --save
+yarn
+yarn workspace @app/condo makemigrations
+yarn workspace @app/condo migrate
+yarn workspace @app/condo dev
+```
+
+### second start
+```shel
+sudo docker-compose up -d postgresdb redis
+yarn workspace @app/condo dev
+```
+
 Up database on default port:
 
 ```shell
