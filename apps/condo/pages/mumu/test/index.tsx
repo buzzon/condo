@@ -2,27 +2,22 @@ import React, { useRef } from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 import { PageContent, PageHeader, PageWrapper } from '@condo/domains/common/components/containers/BaseLayout'
-import { Col, Input, Row, Typography } from 'antd'
-import { Button } from '@condo/domains/common/components/Button'
-import { useRouter } from 'next/router'
+import { Input, Typography } from 'antd'
 import { Mumu } from '@condo/domains/mumu/utils/clientSchema'
-import { useState } from 'react'
 import { useEffect } from 'react'
 import MumuList from '@condo/domains/common/components/test/List'
+import { useCallback } from 'react'
 
 const { Search } = Input;
 
 export default function index() {
-    //useRef
     const inputValue = useRef("")
-
     const { fetchMore, loading, count: total, objs: mumus, } = Mumu.useObjects({ where: { name_contains: inputValue.current } }, { fetchPolicy: 'network-only', })
 
-    //useCalback
-    const handleSearch = async (value) => {
+    const handleSearch = useCallback( async (value) => {
         inputValue.current = value;
-        const result = await fetchMore({ where: { name_contains: value } })
-    }
+        await fetchMore({ where: { name_contains: value } })
+    }, [inputValue])
 
     useEffect(() => {
         return () => console.log("render")
@@ -50,9 +45,7 @@ export default function index() {
                         <h3>Search:
                             <Search onSearch={handleSearch} />
                         </h3>
-                        {/* {MumuList(mumus)} */}
-                        <MumuList list={mumus}>
-
+                        <MumuList list={mumus}>                
                         </MumuList>
                     </div>
                 </PageContent>
