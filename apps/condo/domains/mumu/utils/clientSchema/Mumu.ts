@@ -54,6 +54,7 @@ const {
     useCreate,
     useUpdate,
     useDelete,
+    useSoftDelete,
 } = generateReactHooks<Mumu, MumuUpdateInput, IMumuFormState, IMumuUIState, QueryAllMumusArgs>(MumuGQL, { convertToGQLInput, convertToUIState })
 
 export {
@@ -62,5 +63,6 @@ export {
     useCreate,
     useUpdate,
     useDelete,
+    useSoftDelete,
     convertToUIFormState,
 }
