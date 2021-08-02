@@ -1,15 +1,8 @@
-import { Mumu } from '@condo/domains/mumu/utils/clientSchema'
 import Link from 'next/link'
-import React from 'react'
-
-interface IMumuArray {
-    data: Array<Mumu.IMumuUIState>;
-}
-
+import React, { useMemo, useRef } from 'react'
 
 export default function MumuList({ children, list }) {
-    //usememo
-    console.log("MumuList")
+
     return (<>
         {
             list.map(mumu =>
@@ -20,6 +13,7 @@ export default function MumuList({ children, list }) {
                 </h4>
             )
         }
+        {children}
     </>
     )
 }
