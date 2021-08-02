@@ -7,9 +7,9 @@ import {
     getPageIndexFromQuery,
     getSortStringFromQuery,
     sorterToQuery, queryToSorter, getPageSizeFromQuery,
-} from '@condo/domains/ticket/utils/helpers'
+} from '@condo/domains/mumu/utils/helpers'
 import { getFiltersFromQuery } from '@condo/domains/common/utils/helpers'
-import { IFilters } from '@condo/domains/ticket/utils/helpers'
+import { IFilters } from '@condo/domains/mumu/utils/helpers'
 import { Col, Input, Row, Table, Typography, Checkbox, Button } from 'antd'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -17,11 +17,12 @@ import qs from 'qs'
 import { pickBy, get, debounce } from 'lodash'
 import React, { useCallback, useState } from 'react'
 import { EmptyListView } from '@condo/domains/common/components/EmptyListView'
-import { useTableColumns } from '@condo/domains/ticket/hooks/useTableColumns'
-import { useEmergencySearch } from '@condo/domains/ticket/hooks/useEmergencySearch'
+import { useTableColumns } from '@condo/domains/mumu/hooks/useTableColumns'
+import { useEmergencySearch } from '@condo/domains/mumu/hooks/useEmergencySearch'
 import { useSearch } from '@condo/domains/common/hooks/useSearch'
 import { TitleHeaderAction } from '@condo/domains/common/components/HeaderActions'
 import { Mumu } from '../../domains/mumu/utils/clientSchema'
+import { SortMumusBy } from '../../schema'
 
 interface IPageWithHeaderAction extends React.FC {
     headerAction?: JSX.Element
@@ -33,12 +34,12 @@ const verticalAlign = css`
     }
 `
 
-const TicketsPage: IPageWithHeaderAction = () => {
-    const PageTitleMessage = 'pages.condo.ticket.index.PageTitle'
+const MumusPage: IPageWithHeaderAction = () => {
+    const PageTitleMessage = 'pages.condo.mumu.index.PageTitle'
     const SearchPlaceholder = 'filters.FullSearch'
-    const EmptyListLabel = 'ticket.EmptyList.header'
-    const EmptyListMessage = 'ticket.EmptyList.title'
-    const CreateTicket = 'CreateTicket'
+    const EmptyListLabel = 'mumu.EmptyList.header'
+    const EmptyListMessage = 'mumu.EmptyList.title'
+    const CreateMumu = 'CreateMumu'
     const EmergencyLabel = 'Emergency'
     const router = useRouter()
     const sortFromQuery = sorterToQuery(queryToSorter(getSortStringFromQuery(router.query)))
@@ -46,14 +47,20 @@ const TicketsPage: IPageWithHeaderAction = () => {
     const filtersFromQuery = getFiltersFromQuery<IFilters>(router.query)
     const pagesizeFromQuey: number = getPageSizeFromQuery(router.query)
 
+    // const sortBy = sortFromQuery.length > 0  ? sortFromQuery : 'createdAt_DESC'
+    // const where = { ...filtersToQuery(filtersFromQuery)}
+
     const where = { ...router.query}
     const sortBy = sortFromQuery.length > 0  ? sortFromQuery : 'createdAt_DESC' 
     const {
         fetchMore,
         loading,
         count: total,
-        objs: tickets,
+        objs: mumus,
     } = Mumu.useObjects({
+        sortBy: sortBy as SortMumusBy[],
+        skip: (offsetFromQuery * pagesizeFromQuey) - pagesizeFromQuey,
+        first: pagesizeFromQuey,
         where
     }, {
         fetchPolicy: 'network-only',
@@ -131,12 +138,12 @@ const TicketsPage: IPageWithHeaderAction = () => {
                     <PageHeader title={<Typography.Title style={{ margin: 0 }}>{PageTitleMessage}</Typography.Title>}/>
                     <PageContent>
                         {
-                            !tickets.length && !filtersFromQuery
+                            !mumus.length && !filtersFromQuery
                                 ? <EmptyListView
                                     label={EmptyListLabel}
                                     message={EmptyListMessage}
                                     createRoute='/mumu/create'
-                                    createLabel={CreateTicket} />
+                                    createLabel={CreateMumu} />
                                 : <Row gutter={[0, 40]} align={'middle'}>
                                     <Col span={6}>
                                         <Input
@@ -158,7 +165,7 @@ const TicketsPage: IPageWithHeaderAction = () => {
                                             css={verticalAlign}
                                             tableLayout={'fixed'}
                                             loading={loading}
-                                            dataSource={tickets}
+                                            dataSource={mumus}
                                             columns={tableColumns}
                                             onRow={handleRowAction}
                                             onChange={handleTableChange}
@@ -179,6 +186,6 @@ const TicketsPage: IPageWithHeaderAction = () => {
     )
 }
 
-TicketsPage.headerAction = <TitleHeaderAction descriptor={{ id: 'menu.ControlRoom' }}/>
+MumusPage.headerAction = <TitleHeaderAction descriptor={{ id: 'menu.ControlRoom' }}/>
 
-export default TicketsPage
+export default MumusPage
