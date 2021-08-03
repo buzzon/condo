@@ -12,7 +12,6 @@ jobs:
         run: docker-compose up -d postgresdb redis
       - name: yarn run cypress run
         uses: cypress-io/github-action@v2
-      - name: yarn workspace @app/condo build
         with:
           build: yarn workspace @app/condo build
           start: yarn workspace @app/condo start
@@ -20,3 +19,4 @@ jobs:
       NODE_ENV: development
       DISABLE_LOGGING: true
       WORKER_REDIS_URL: redis://localhost:6379
+      COOKIE_SECRET: doma.ai.secret
