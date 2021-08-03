@@ -37,6 +37,7 @@ jobs:
         with:
           build: yarn workspace @app/condo build
           start: yarn workspace @app/condo start
+          path: app/condo
     env:
       NODE_ENV: development
       DISABLE_LOGGING: true
