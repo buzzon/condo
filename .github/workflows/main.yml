@@ -13,5 +13,5 @@ jobs:
       - name: yarn run cypress run
         uses: cypress-io/github-action@v2
         with:
-          build: yarn run build
-          start: yarn run start
+          build: yarn yarn workspace @app/condo build
+          start: yarn yarn workspace @app/condo start
