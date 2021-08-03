@@ -30,4 +30,3 @@ npm-debug.*
 *.orig.*
 .kmigratorknex.connection.json
 .kmigratorknex.schema.json
-apps/condo/cypress.json
