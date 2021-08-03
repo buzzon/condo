@@ -8,9 +8,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: install packages
+        run: |
+          yarn
+          pip3 install django
+          pip3 install psycopg2-binary
       - name: Docker compose up databases
         run: docker-compose up -d postgresdb redis
-      - name: yarn run cypress run
+      - name: Makemigrations
+        run: yarn workspace @app/condo makemigrations
+      - name: Migrate
+        run: yarn workspace @app/condo migrate
+      - name: Run cypress
         uses: cypress-io/github-action@v2
         with:
           build: yarn workspace @app/condo build
