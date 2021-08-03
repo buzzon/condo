@@ -12,6 +12,7 @@ jobs:
         run: docker-compose up -d postgresdb redis
       - name: yarn run cypress run
         uses: cypress-io/github-action@v2
+      - name: yarn workspace @app/condo build
         with:
           build: yarn workspace @app/condo build
           start: yarn workspace @app/condo start
