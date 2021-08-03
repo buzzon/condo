@@ -3,6 +3,12 @@ import SignInPage from "../../objects/SignInPage";
 
 describe('Sign In', () => {
 
+  it('Auto transition to the authorization page', () => {
+    const home = new HomePage();
+    home.visit();
+    cy.url({ timeout: 10000 }).should('include', '/auth/signin',)
+  });
+
   it('Empty Phone', () => {
     cy.fixture('user.json').then(user => {
       const signIn = new SignInPage();
@@ -50,12 +56,4 @@ describe('Sign In', () => {
         cy.url({ timeout: 10000 }).should('include', '/user',)
     })
   })
-})
-
-describe('Auto transition to the authorization page', () => {
-  it('Auto transition to the authorization page', () => {
-    const home = new HomePage();
-    home.visit();
-    cy.url({ timeout: 10000 }).should('include', '/auth/signin',)
-  });
 })
