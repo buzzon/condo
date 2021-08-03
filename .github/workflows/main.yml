@@ -18,3 +18,4 @@ jobs:
     env:
       NODE_ENV: development
       DISABLE_LOGGING: true
+      WORKER_REDIS_URL:redis://localhost:6379
