@@ -38,7 +38,7 @@ jobs:
           build: yarn workspace @app/condo build
           start: yarn workspace @app/condo start
     env:
-      NODE_ENV: production
+      NODE_ENV: development
       DISABLE_LOGGING: true
       WORKER_REDIS_URL: redis://localhost:6379
       COOKIE_SECRET: doma.ai.secret
