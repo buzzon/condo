@@ -8,7 +8,7 @@ export default function index() {
     return (
         <>
             <Head>
-                <title>Test page s</title>
+                <title>Test page</title>
             </Head>
             <PageWrapper>
                 <PageHeader title={<Typography.Title style={{ margin: 0 }}>Post</Typography.Title>} />
