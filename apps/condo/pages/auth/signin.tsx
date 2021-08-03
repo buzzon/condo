@@ -93,16 +93,18 @@ const SignInForm = (): React.ReactElement => {
             requiredMark={false}
         >
             <Form.Item
+                data-testid="SignInPhoneItem"
                 name="phone"
                 label={PhoneMsg}
                 labelAlign='left'
                 labelCol={{ flex: 1 }}
                 rules={[{ required: true, message: FieldIsRequiredMsg }]}
             >
-                <PhoneInput placeholder={ExamplePhoneMsg} style={INPUT_STYLE} tabIndex={1} />
+                <PhoneInput  placeholder={ExamplePhoneMsg} style={INPUT_STYLE} tabIndex={1} />
             </Form.Item>
 
             <Form.Item
+                data-testid="SignInPasswordItem"
                 name="password"
                 label={PasswordMsg}
                 labelAlign='left'
@@ -115,6 +117,7 @@ const SignInForm = (): React.ReactElement => {
 
             <div style={{ paddingTop: '4em', display: 'flex', justifyContent: 'space-between', width: '100%' }}>
                 <Button
+                    data-testid="SignInSubmitButton"
                     key='submit'
                     type='sberPrimary'
                     htmlType="submit"
