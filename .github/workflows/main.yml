@@ -33,11 +33,12 @@ jobs:
         run: yarn workspace @app/condo migrate
 
       - name: Run cypress
+        run: cd apps/condo
         uses: cypress-io/github-action@v2
         with:
+          parallel: true
           build: yarn workspace @app/condo build
           start: yarn workspace @app/condo start
-          path: app/condo
     env:
       NODE_ENV: development
       DISABLE_LOGGING: true
