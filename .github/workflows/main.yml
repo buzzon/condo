@@ -36,7 +36,6 @@ jobs:
         run: cd apps/condo
         uses: cypress-io/github-action@v2
         with:
-          parallel: true
           build: yarn workspace @app/condo build
           start: yarn workspace @app/condo start
     env:
