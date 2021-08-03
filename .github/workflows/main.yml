@@ -8,10 +8,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      # Install NPM dependencies, cache them correctly
-      # and run all Cypress tests
+      - name: Docker compose up databases
+        run: docker-compose up -d postgresdb redis
       - name: yarn run cypress run
         uses: cypress-io/github-action@v2
         with:
           build: yarn workspace @app/condo build
           start: yarn workspace @app/condo start
+    env:
+      NODE_ENV: development
+      DISABLE_LOGGING: true
