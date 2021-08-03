@@ -5,27 +5,41 @@ on: [push]
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 14.x ]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
       - name: install packages
         run: |
           yarn
           pip3 install django
           pip3 install psycopg2-binary
+
       - name: Docker compose up databases
         run: docker-compose up -d postgresdb redis
+
       - name: Makemigrations
         run: yarn workspace @app/condo makemigrations
+
       - name: Migrate
         run: yarn workspace @app/condo migrate
+
       - name: Run cypress
         uses: cypress-io/github-action@v2
         with:
           build: yarn workspace @app/condo build
           start: yarn workspace @app/condo start
     env:
-      NODE_ENV: development
+      NODE_ENV: production
       DISABLE_LOGGING: true
       WORKER_REDIS_URL: redis://localhost:6379
       COOKIE_SECRET: doma.ai.secret
+      DATABASE_URL: postgresql://postgres:postgres@127.0.0.1/main
