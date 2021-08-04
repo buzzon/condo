@@ -31,7 +31,7 @@ jobs:
 
       - name: Migrate
         run: |
-          yarn workspace @app/condo migrate
+          yarn workspace @apps/condo migrate
           cd app/condo
 
       - name: Run cypress
