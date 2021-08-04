@@ -43,11 +43,11 @@ jobs:
         with:
           working-directory: apps/condo
           build: yarn workspace @app/condo build
-          start: yarn workspace @app/condo start
-          wait-on: "http://localhost:3000"
+          start: yarn workspace @app/condo start & bash ../../.github/workflows/waitForLocalhostApiReady.sh
+          wait-on: http://localhost:3000
           wait-on-timeout: 500
           record: true
-          parallel: true
+          # parallel: true
         env:
           CYPRESS_RECORD_KEY: ad4215d6-094f-4dcb-8caf-dd6645c4ae02
 
@@ -58,4 +58,4 @@ jobs:
       COOKIE_SECRET: doma.ai.secret
       DATABASE_URL: postgresql://postgres:postgres@127.0.0.1/main
       SERVER_URL: http://localhost:3000
-      DEBUG: commit-info,cypress:server:record
+      # DEBUG: commit-info,cypress:server:record
