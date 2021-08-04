@@ -1,7 +1,8 @@
 class SignInPage {
 
     visit() {
-      cy.visit('http://localhost:3000/auth/signin');
+      cy.visit('http://localhost:3000/');
+      cy.url({ timeout: 10000 }).should('include', '/auth/signin',)
     }
 
     getPhoneError() {
