@@ -12,6 +12,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Cypress install
+        uses: cypress-io/github-action@v2
+        with:
+          runTests: false
+      # report machine parameters
+      - run: yarn cypress info
+      - run: node -p 'os.cpus()'
+      - run: yarn types
+      - run: yarn lint
+      - run: yarn test:unit:ci
+      - run: yarn build:ci
+
+      - name: Save build folder
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          if-no-files-found: error
+          path: build
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -38,7 +57,11 @@ jobs:
         with:
           working-directory: apps/condo
           build: yarn workspace @app/condo build
-          start: yarn workspace @app/condo start & bash ./.github/workflows/waitForLocalhostApiReady.sh
+          start: yarn workspace @app/condo start & wait-on http://localhost:3000
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 120
+          record: true
+          parallel: true
 
     env:
       NODE_ENV: development
@@ -47,4 +70,4 @@ jobs:
       COOKIE_SECRET: doma.ai.secret
       DATABASE_URL: postgresql://postgres:postgres@127.0.0.1/main
       SERVER_URL: http://localhost:3000
-
+      DEBUG: commit-info,cypress:server:record
