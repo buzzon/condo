@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Test
-        run: sudo docker-compose up -d postgresdb redis
+        run: docker-compose up -d postgresdb redis
   
       - name: yarn workspace @app/condo dev & bash ./.github/workflows/waitForLocalhostApiReady.sh
         run: yarn workspace @app/condo dev & bash ./.github/workflows/waitForLocalhostApiReady.sh
