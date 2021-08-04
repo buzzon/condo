@@ -20,13 +20,6 @@ jobs:
       - run: yarn cypress info
       - run: node -p 'os.cpus()'
 
-      - name: Save build folder
-        uses: actions/upload-artifact@v2
-        with:
-          name: build
-          if-no-files-found: error
-          path: build
-
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
