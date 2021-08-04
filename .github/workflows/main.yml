@@ -37,6 +37,7 @@ jobs:
         with:
           build: yarn workspace @app/condo build
           start: yarn workspace @app/condo start
+
           
     env:
       NODE_ENV: development
