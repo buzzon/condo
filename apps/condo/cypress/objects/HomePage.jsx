@@ -3,7 +3,7 @@ import SignInPage from "./SignInPage";
 class HomePage {
   
   visit() {
-    cy.visit('/');
+    cy.visit('http://localhost:3000/');
   }
   
   // getUserAvatar() {
