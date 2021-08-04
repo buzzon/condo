@@ -32,11 +32,11 @@ jobs:
       - name: Migrate
         run: |
           yarn workspace @app/condo migrate
-          cd apps/condo
-
+          
       - name: Run cypress
         uses: cypress-io/github-action@v2
         with:
+          working-directory: apps/condo
           build: yarn workspace @app/condo build
           start: yarn workspace @app/condo start
 
