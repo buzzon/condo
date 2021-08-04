@@ -12,11 +12,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Test
+      - name: docker-compose up -d postgresdb redis
         run: docker-compose up -d postgresdb redis
   
       - name: yarn workspace @app/condo dev
         run: yarn workspace @app/condo dev
+          with:
+            working-directory: apps/condo
 
 
       - name: yarn run cypress run --record --key ad4215d6-094f-4dcb-8caf-dd6645c4ae02
