@@ -47,3 +47,4 @@ jobs:
       COOKIE_SECRET: doma.ai.secret
       DATABASE_URL: postgresql://postgres:postgres@127.0.0.1/main
       SERVER_URL: http://localhost:3000
+
