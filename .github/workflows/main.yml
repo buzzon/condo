@@ -12,19 +12,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: docker-compose up -d postgresdb redis
-        run: docker-compose up -d postgresdb redis
-  
-      - name: yarn workspace @app/condo dev
-        run: |
-          cd apps/condo
-          yarn workspace @app/condo dev
-
-
-      - name: yarn run cypress run --record --key ad4215d6-094f-4dcb-8caf-dd6645c4ae02
-        run: | 
-          cd apps/condo
-          yarn run cypress run --record --key ad4215d6-094f-4dcb-8caf-dd6645c4ae02
       # - name: Cypress install
       #   uses: cypress-io/github-action@v2
       #   with:
@@ -41,8 +28,8 @@ jobs:
       #     pip3 install django
       #     pip3 install psycopg2-binary
 
-      # - name: Docker compose up databases
-      #   run: docker-compose up -d postgresdb redis
+      - name: Docker compose up databases
+        run: docker-compose up -d postgresdb redis
 
       # - name: Makemigrations
       #   run: yarn workspace @app/condo makemigrations
@@ -51,18 +38,16 @@ jobs:
       #   run: |
       #     yarn workspace @app/condo migrate
 
-      # - name: Run cypress
-      #   uses: cypress-io/github-action@v2 
-      #   with:
-      #     working-directory: apps/condo
-      #     build: yarn workspace @app/condo build
-      #     start: yarn workspace @app/condo start
-      #     wait-on: "http://localhost:3000"
-      #     # wait-on-timeout: 500
-      #     # record: true
-      #     parallel: true
-      #   env:
-      #     CYPRESS_RECORD_KEY: ad4215d6-094f-4dcb-8caf-dd6645c4ae02
+      - name: Run cypress
+        uses: cypress-io/github-action@v2 
+        with:
+          working-directory: apps/condo
+          build: yarn workspace @app/condo build
+          start: yarn workspace @app/condo start
+          wait-on: "http://localhost:3000"
+          parallel: true
+        env:
+          CYPRESS_RECORD_KEY: ad4215d6-094f-4dcb-8caf-dd6645c4ae02
 
     env:
       NODE_ENV: development
