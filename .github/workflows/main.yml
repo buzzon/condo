@@ -39,12 +39,14 @@ jobs:
       #     yarn workspace @app/condo migrate
 
       - name: Run cypress
-        uses: cypress-io/github-action@v2 
+        uses: cypress-io/github-action@v2
         with:
           working-directory: apps/condo
-          build: yarn workspace @app/condo build
-          start: yarn workspace @app/condo start
+          # build: yarn workspace @app/condo build
+          start: yarn workspace @app/condo dev
           wait-on: "http://localhost:3000"
+          wait-on-timeout: 500
+          record: true
           parallel: true
         env:
           CYPRESS_RECORD_KEY: ad4215d6-094f-4dcb-8caf-dd6645c4ae02
