@@ -15,11 +15,15 @@ jobs:
       - name: Test
         run: docker-compose up -d postgresdb redis
   
-      - name: yarn workspace @app/condo dev & bash ./.github/workflows/waitForLocalhostApiReady.sh
-        run: yarn workspace @app/condo dev & bash ./.github/workflows/waitForLocalhostApiReady.sh
+      - name: cd apps/condo yarn workspace @app/condo dev & bash ../../.github/workflows/waitForLocalhostApiReady.sh
+        run: | 
+        cd apps/condo
+        yarn workspace @app/condo dev & bash ../../.github/workflows/waitForLocalhostApiReady.sh
 
       - name: yarn run cypress run --record --key ad4215d6-094f-4dcb-8caf-dd6645c4ae02
-        run: yarn run cypress run --record --key ad4215d6-094f-4dcb-8caf-dd6645c4ae02
+        run:  | 
+        cd apps/condo
+        yarn run cypress run --record --key ad4215d6-094f-4dcb-8caf-dd6645c4ae02
       # - name: Cypress install
       #   uses: cypress-io/github-action@v2
       #   with:
