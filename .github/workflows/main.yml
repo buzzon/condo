@@ -33,7 +33,7 @@ jobs:
         run: yarn workspace @app/condo migrate
 
       - name: Run cypress
-        uses: app/condo/ cypress-io/github-action@v2
+        uses: cypress-io/github-action@v2
         with:
           build: yarn workspace @app/condo build
           start: yarn workspace @app/condo start
