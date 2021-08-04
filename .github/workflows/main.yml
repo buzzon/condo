@@ -5,38 +5,38 @@ on: [push]
 jobs:
   cypress-run:
     runs-on: self-hosted
-    strategy:
-      matrix:
-        node-version: [ 14.x ]
+    # strategy:
+    #   matrix:
+    #     node-version: [ 14.x ]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Cypress install
-        uses: cypress-io/github-action@v2
-        with:
-          runTests: false
+      # - name: Cypress install
+      #   uses: cypress-io/github-action@v2
+      #   with:
+      #     runTests: false
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
+      # - name: Use Node.js ${{ matrix.node-version }}
+      #   uses: actions/setup-node@v1
+      #   with:
+      #     node-version: ${{ matrix.node-version }}
 
-      - name: install packages
-        run: |
-          yarn
-          pip3 install django
-          pip3 install psycopg2-binary
+      # - name: install packages
+      #   run: |
+      #     yarn
+      #     pip3 install django
+      #     pip3 install psycopg2-binary
 
       - name: Docker compose up databases
         run: docker-compose up -d postgresdb redis
 
-      - name: Makemigrations
-        run: yarn workspace @app/condo makemigrations
+      # - name: Makemigrations
+      #   run: yarn workspace @app/condo makemigrations
 
-      - name: Migrate
-        run: |
-          yarn workspace @app/condo migrate
+      # - name: Migrate
+      #   run: |
+      #     yarn workspace @app/condo migrate
 
       - name: Run cypress
         uses: cypress-io/github-action@v2
@@ -49,7 +49,8 @@ jobs:
           record: true
           parallel: true
           browser: chrome
-          key: ad4215d6-094f-4dcb-8caf-dd6645c4ae02
+        env:
+          CYPRESS_RECORD_KEY: ad4215d6-094f-4dcb-8caf-dd6645c4ae02
 
     env:
       NODE_ENV: development
