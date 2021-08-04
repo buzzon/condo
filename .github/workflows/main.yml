@@ -13,11 +13,13 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Test
-        run: |
-          sudo docker-compose up -d postgresdb redis
-          yarn workspace @app/condo dev &
-          bash ./.github/workflows/waitForLocalhostApiReady.sh
-          yarn run cypress run --record --key ad4215d6-094f-4dcb-8caf-dd6645c4ae02
+        run: sudo docker-compose up -d postgresdb redis
+  
+      - name: yarn workspace @app/condo dev & bash ./.github/workflows/waitForLocalhostApiReady.sh
+        run: yarn workspace @app/condo dev & bash ./.github/workflows/waitForLocalhostApiReady.sh
+
+      - name: yarn run cypress run --record --key ad4215d6-094f-4dcb-8caf-dd6645c4ae02
+        run: yarn run cypress run --record --key ad4215d6-094f-4dcb-8caf-dd6645c4ae02
       # - name: Cypress install
       #   uses: cypress-io/github-action@v2
       #   with:
@@ -34,8 +36,8 @@ jobs:
       #     pip3 install django
       #     pip3 install psycopg2-binary
 
-      - name: Docker compose up databases
-        run: docker-compose up -d postgresdb redis
+      # - name: Docker compose up databases
+      #   run: docker-compose up -d postgresdb redis
 
       # - name: Makemigrations
       #   run: yarn workspace @app/condo makemigrations
