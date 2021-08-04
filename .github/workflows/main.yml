@@ -48,7 +48,6 @@ jobs:
           wait-on-timeout: 500
           record: true
           parallel: true
-          browser: chrome
         env:
           CYPRESS_RECORD_KEY: ad4215d6-094f-4dcb-8caf-dd6645c4ae02
 
