@@ -43,7 +43,7 @@ jobs:
         with:
           working-directory: apps/condo
           # build: yarn workspace @app/condo build
-          start: yarn workspace @app/condo dev
+          start: yarn workspace @app/condo dev & bash ./.github/workflows/waitForLocalhostApiReady.sh
           wait-on: "http://localhost:3000"
           wait-on-timeout: 500
           record: true
