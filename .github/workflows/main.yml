@@ -31,8 +31,8 @@ jobs:
 
       - name: Migrate
         run: |
-          yarn workspace @apps/condo migrate
-          cd app/condo
+          yarn workspace @app/condo migrate
+          cd apps/condo
 
       - name: Run cypress
         uses: cypress-io/github-action@v2
