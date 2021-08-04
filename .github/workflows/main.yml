@@ -42,8 +42,8 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           working-directory: apps/condo
-          build: yarn workspace @app/condo build
-          start: yarn workspace @app/condo start
+          # build: yarn workspace @app/condo build
+          start: yarn workspace @app/condo dev
           wait-on: "http://localhost:3000"
           wait-on-timeout: 500
           record: true
