@@ -1,6 +1,6 @@
 class SignInPage {
     visit() {
-      cy.visit('http://localhost:3000/auth/signin?next=%2Fuser')
+      cy.visit('/auth/signin?next=%2Fuser')
     }
   
     getPhoneError() {
