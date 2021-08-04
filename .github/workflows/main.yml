@@ -16,9 +16,6 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           runTests: false
-      # report machine parameters
-      - run: yarn cypress info
-      - run: node -p 'os.cpus()'
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
@@ -46,11 +43,13 @@ jobs:
         with:
           working-directory: apps/condo
           build: yarn workspace @app/condo build
-          start: yarn workspace @app/condo start & wait-on http://localhost:3000
+          start: yarn workspace @app/condo start
           wait-on: "http://localhost:3000"
-          wait-on-timeout: 120
+          wait-on-timeout: 500
           record: true
           parallel: true
+          browser: chrome
+          key: ad4215d6-094f-4dcb-8caf-dd6645c4ae02
 
     env:
       NODE_ENV: development
