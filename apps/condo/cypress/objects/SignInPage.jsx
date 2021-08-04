@@ -1,8 +1,9 @@
 class SignInPage {
+
     visit() {
-      cy.visit('http://localhost:3000/auth/signin')
+      cy.visit('http://localhost:3000/auth/signin');
     }
-  
+
     getPhoneError() {
       return cy.get(`[data-testid=SignInPhoneItem] [role=alert]`)
     }
