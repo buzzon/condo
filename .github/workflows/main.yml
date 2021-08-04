@@ -30,6 +30,8 @@ jobs:
 
       - name: Docker compose up databases
         run: docker-compose up -d postgresdb redis
+      - name: keystone build
+        run: keystone build
 
       # - name: Makemigrations
       #   run: yarn workspace @app/condo makemigrations
@@ -43,7 +45,7 @@ jobs:
         with:
           working-directory: apps/condo
           build: yarn workspace @app/condo build
-          start: yarn workspace @app/condo start & bash ../../.github/workflows/waitForLocalhostApiReady.sh
+          start: yarn workspace @app/condo start
           wait-on: http://localhost:3000
           wait-on-timeout: 500
           record: true
