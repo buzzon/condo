@@ -17,8 +17,8 @@ jobs:
   
       - name: yarn workspace @app/condo dev
         run: |
-        cd apps/condo
-        yarn workspace @app/condo dev
+          cd apps/condo
+          yarn workspace @app/condo dev
 
 
       - name: yarn run cypress run --record --key ad4215d6-094f-4dcb-8caf-dd6645c4ae02
