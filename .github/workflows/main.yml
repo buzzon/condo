@@ -48,6 +48,3 @@ jobs:
       DATABASE_URL: postgresql://postgres:postgres@127.0.0.1/main
       SERVER_URL: http://localhost:3000
 
-
-
-
