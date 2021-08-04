@@ -12,6 +12,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Test
+        run: |
+          sudo docker-compose up -d postgresdb redis
+          yarn workspace @app/condo dev &
+          bash ./.github/workflows/waitForLocalhostApiReady.sh
+          yarn run cypress run
       # - name: Cypress install
       #   uses: cypress-io/github-action@v2
       #   with:
@@ -38,18 +44,18 @@ jobs:
       #   run: |
       #     yarn workspace @app/condo migrate
 
-      - name: Run cypress
-        uses: cypress-io/github-action@v2
-        with:
-          working-directory: apps/condo
-          build: yarn workspace @app/condo build
-          start: yarn workspace @app/condo start & bash ./.github/workflows/waitForLocalhostApiReady.sh
-          wait-on: "http://localhost:3000"
-          wait-on-timeout: 500
-          record: true
-          parallel: true
-        env:
-          CYPRESS_RECORD_KEY: ad4215d6-094f-4dcb-8caf-dd6645c4ae02
+      # - name: Run cypress
+      #   uses: cypress-io/github-action@v2 
+      #   with:
+      #     working-directory: apps/condo
+      #     build: yarn workspace @app/condo build
+      #     start: yarn workspace @app/condo start
+      #     wait-on: "http://localhost:3000"
+      #     # wait-on-timeout: 500
+      #     # record: true
+      #     parallel: true
+      #   env:
+      #     CYPRESS_RECORD_KEY: ad4215d6-094f-4dcb-8caf-dd6645c4ae02
 
     env:
       NODE_ENV: development
