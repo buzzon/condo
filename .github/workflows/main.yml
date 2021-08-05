@@ -46,22 +46,9 @@ jobs:
           working-directory: apps/condo
           build: yarn workspace @app/condo build
           start: |
-            cp .env.build .env 
+            cp .env.b .env 
             yarn workspace @app/condo start
           wait-on: http://localhost:3000
           wait-on-timeout: 500
           record: true
           parallel: true
-        env:
-          CYPRESS_RECORD_KEY: ad4215d6-094f-4dcb-8caf-dd6645c4ae02
-
-    env:
-      NODE_ENV: development
-      DISABLE_LOGGING: true
-      WORKER_REDIS_URL: redis://localhost:6379
-      REDIS_URL: redis://localhost:6379
-      COOKIE_SECRET: doma.ai.secret
-      DATABASE_URL: postgresql://postgres:postgres@127.0.0.1/main
-      SERVER_URL: http://localhost:3000
-      # DEBUG: commit-info,cypress:server:record
-      GOOGLE_RECAPTCHA_CONFIG: '{"SITE_KEY": "6LcPRvQaAAAAAJRyxsFIB4rP5VH036pFOkNH8lgh", "SERVER_KEY": "6LcPRvQaAAAAADn_h1440Es7fXIGD0E4lpXR_FyF"}'
