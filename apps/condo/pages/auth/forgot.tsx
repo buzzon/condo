@@ -149,7 +149,7 @@ const ResetPage: AuthPage = () => {
     )
 }
 
-ResetPage.headerAction = <ButtonHeaderAction descriptor={{ id: 'pages.auth.Register' }} path={'/auth/register'}/>
+ResetPage.headerAction = <ButtonHeaderAction testid={"ForgotRegistrationButton"} descriptor={{ id: 'pages.auth.Register' }} path={'/auth/register'}/>
 
 ResetPage.container = AuthLayout
 

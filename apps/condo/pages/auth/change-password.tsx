@@ -169,7 +169,7 @@ const ChangePasswordPage: AuthPage = () => {
     )
 }
 
-ChangePasswordPage.headerAction = <ButtonHeaderAction descriptor={{ id: 'pages.auth.Register' }} path={'/auth/register'}/>
+ChangePasswordPage.headerAction = <ButtonHeaderAction testid={"ChangePasswprdRegistrationButton"} descriptor={{ id: 'pages.auth.Register' }} path={'/auth/register'}/>
 
 ChangePasswordPage.container = AuthLayout
 

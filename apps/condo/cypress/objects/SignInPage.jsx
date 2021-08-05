@@ -1,8 +1,10 @@
+import HomePage from "./HomePage";
+
 class SignInPage {
 
     visit() {
-      cy.visit('http://localhost:3000/');
-      cy.url({ timeout: 10000 }).should('include', '/auth/signin',)
+      cy.visit(HomePage.url);
+      cy.url().should('include', '/auth/signin',)
     }
 
     getPhoneError() {
@@ -14,14 +16,14 @@ class SignInPage {
     }
   
     fillPhone(value) {
-      const field = cy.get(`[data-testid=SignInPhoneItem]`).find('input')
+      const field = cy.get(`[data-testid=SignInPhoneItem] input`)
       field.clear()
       field.type(value)
       return this
     }
   
     fillPassword(value) {
-      const field = cy.get(`[data-testid=SignInPasswordItem]`).find('input')
+      const field = cy.get(`[data-testid=SignInPasswordItem] input`)
       field.clear()
       field.type(value)
   
@@ -30,6 +32,11 @@ class SignInPage {
   
     submit() {
       const button = cy.get(`[data-testid=SignInSubmitButton]`)
+      button.click()
+    }
+
+    registration() {
+      const button = cy.get(`[data-testid=SignInRegistrationButton]`)
       button.click()
     }
   }

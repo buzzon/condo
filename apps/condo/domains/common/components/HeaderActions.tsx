@@ -22,6 +22,7 @@ interface ITitleHeaderActionProps {
 interface IRightButtonHeaderActionProps {
     descriptor: MessageDescriptor
     path: string
+    testid: string
 }
 
 export const ReturnBackHeaderAction: React.FC<IReturnBackHeaderActionProps> = (props) => {
@@ -55,7 +56,7 @@ export const TitleHeaderAction: React.FC<ITitleHeaderActionProps> = (props) => {
 }
 
 export const ButtonHeaderAction: React.FC<IRightButtonHeaderActionProps> = (props) => {
-    const { descriptor, path } = props
+    const { descriptor, path, testid } = props
     const intl = useIntl()
     const ButtonMessage = intl.formatMessage(descriptor)
     const { isMobile } = useContext(AuthLayoutContext)
@@ -65,6 +66,7 @@ export const ButtonHeaderAction: React.FC<IRightButtonHeaderActionProps> = (prop
             key='submit'
             onClick={() => Router.push(path)}
             type='sberPrimary'
+            data-testid={testid}
             secondary={true}
             size={isMobile ? 'middle' : 'large'}
         >
