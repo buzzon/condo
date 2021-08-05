@@ -42,7 +42,7 @@ jobs:
         with:
           working-directory: apps/condo
           build: yarn workspace @app/condo build
-          start: yarn workspace @app/condo start
+          start: cp .env.example .env & yarn workspace @app/condo start
           wait-on: http://localhost:3000
           wait-on-timeout: 500
           record: true
