@@ -20,30 +20,30 @@ jobs:
             echo "$line" >> $GITHUB_ENV
           done < .env.test
 
-      # # - name: Cypress install
-      # #   uses: cypress-io/github-action@v2
-      # #   with:
-      # #     runTests: false
+      - name: Cypress install
+        uses: cypress-io/github-action@v2
+        with:
+          runTests: false
 
-      # # - name: Use Node.js ${{ matrix.node-version }}
-      # #   uses: actions/setup-node@v1
-      # #   with:
-      # #     node-version: ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
-      # # - name: install packages
-      # #   run: |
-      # #     yarn
-      # #     pip3 install django
-      # #     pip3 install psycopg2-binary
+      - name: install packages
+        run: |
+          yarn
+          pip3 install django
+          pip3 install psycopg2-binary
 
       - name: Docker compose up databases
         run: docker-compose up -d postgresdb redis
 
-      # # - name: Makemigrations
-      # #   run: yarn workspace @app/condo makemigrations
+      - name: Makemigrations
+        run: yarn workspace @app/condo makemigrations
 
-      # # - name: Migrate
-      # #   run: yarn workspace @app/condo migrate
+      - name: Migrate
+        run: yarn workspace @app/condo migrate
             
       - name: Run cypress
         uses: cypress-io/github-action@v2
