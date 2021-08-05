@@ -10,7 +10,6 @@ describe('Sign In new user', () => {
       registration
         .fillPhone(user.phone)
         .submit();
-      cy.url().should('include', 'token');
       registration
         .fillSMSCode(user.sms)
       registration
