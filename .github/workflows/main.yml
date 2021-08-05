@@ -64,4 +64,4 @@ jobs:
       DATABASE_URL: postgresql://postgres:postgres@127.0.0.1/main
       SERVER_URL: http://localhost:3000
       # DEBUG: commit-info,cypress:server:record
-      GOOGLE_RECAPTCHA_CONFIG: {SITE_KEY: "6LcPRvQaAAAAAJRyxsFIB4rP5VH036pFOkNH8lgh", SERVER_KEY: "6LcPRvQaAAAAADn_h1440Es7fXIGD0E4lpXR_FyF"}
+      GOOGLE_RECAPTCHA_CONFIG: '{"SITE_KEY": "6LcPRvQaAAAAAJRyxsFIB4rP5VH036pFOkNH8lgh", "SERVER_KEY": "6LcPRvQaAAAAADn_h1440Es7fXIGD0E4lpXR_FyF"}'
