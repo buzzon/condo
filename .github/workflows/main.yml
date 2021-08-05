@@ -45,7 +45,9 @@ jobs:
         with:
           working-directory: apps/condo
           build: yarn workspace @app/condo build
-          start: yarn workspace @app/condo start
+          start: |
+            cp .env.build .env 
+            yarn workspace @app/condo start
           wait-on: http://localhost:3000
           wait-on-timeout: 500
           record: true
@@ -57,6 +59,7 @@ jobs:
       NODE_ENV: development
       DISABLE_LOGGING: true
       WORKER_REDIS_URL: redis://localhost:6379
+      REDIS_URL: redis://localhost:6379
       COOKIE_SECRET: doma.ai.secret
       DATABASE_URL: postgresql://postgres:postgres@127.0.0.1/main
       SERVER_URL: http://localhost:3000
