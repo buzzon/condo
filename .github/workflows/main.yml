@@ -5,9 +5,9 @@ on: [push]
 jobs:
   cypress-run:
     runs-on: self-hosted
-    # strategy:
-    #   matrix:
-    #     node-version: [ 14.x ]
+    strategy:
+      matrix:
+        node-version: [ 14.x ]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -17,10 +17,10 @@ jobs:
         with:
           runTests: false
 
-      # - name: Use Node.js ${{ matrix.node-version }}
-      #   uses: actions/setup-node@v1
-      #   with:
-      #     node-version: ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
       - name: install packages
         run: |
@@ -35,8 +35,7 @@ jobs:
         run: yarn workspace @app/condo makemigrations
 
       - name: Migrate
-        run: |
-          yarn workspace @app/condo migrate
+        run: yarn workspace @app/condo migrate
 
       - name: Run cypress
         uses: cypress-io/github-action@v2
