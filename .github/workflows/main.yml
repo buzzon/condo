@@ -18,7 +18,7 @@ jobs:
         run: |
           while read line; do
             echo "$line" >> $GITHUB_ENV
-          done < ${{ env.ENV_FILE }}
+          done < ${{ .env.test }}
 
       # # - name: Cypress install
       # #   uses: cypress-io/github-action@v2
