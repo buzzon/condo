@@ -15,7 +15,7 @@ jobs:
       - name: cp .env.example .env
         run: |
           pwd
-          cp .env.example .env
+          cp .env.build .env
 
     #   - name: Cypress install
     #     uses: cypress-io/github-action@v2
