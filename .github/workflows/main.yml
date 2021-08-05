@@ -15,7 +15,7 @@ jobs:
       - name: Import environment variables from a file
         id: import-env
         shell: bash
-          run: < ${{ env.ENV_FILE }} >> $GITHUB_ENV
+          run: cat ${{ env.ENV_FILE }} >> $GITHUB_ENV
 
       # # - name: Cypress install
       # #   uses: cypress-io/github-action@v2
