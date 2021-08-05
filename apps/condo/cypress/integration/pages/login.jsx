@@ -53,7 +53,7 @@ describe('Sign In', () => {
         .fillPhone(user.phone)
         .fillPassword(user.password)
         .submit();
-        cy.url({ timeout: 10000 }).should('include', '/user',)
+        cy.url().should('include', '/',)
     })
   })
 })
