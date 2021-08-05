@@ -12,49 +12,54 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      # - name: Cypress install
-      #   uses: cypress-io/github-action@v2
-      #   with:
-      #     runTests: false
+      - name: cp .env.example .env
+        run: |
+          pwd
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
 
-      # - name: install packages
-      #   run: |
-      #     yarn
-      #     pip3 install django
-      #     pip3 install psycopg2-binary
+    #   - name: Cypress install
+    #     uses: cypress-io/github-action@v2
+    #     with:
+    #       runTests: false
 
-      - name: Docker compose up databases
-        run: docker-compose up -d postgresdb redis
+    #   - name: Use Node.js ${{ matrix.node-version }}
+    #     uses: actions/setup-node@v1
+    #     with:
+    #       node-version: ${{ matrix.node-version }}
 
-      - name: Makemigrations
-        run: yarn workspace @app/condo makemigrations
+    #   - name: install packages
+    #     run: |
+    #       yarn
+    #       pip3 install django
+    #       pip3 install psycopg2-binary
 
-      - name: Migrate
-        run: yarn workspace @app/condo migrate
+    #   - name: Docker compose up databases
+    #     run: docker-compose up -d postgresdb redis
 
-      - name: Run cypress
-        uses: cypress-io/github-action@v2
-        with:
-          working-directory: apps/condo
-          build: yarn workspace @app/condo build
-          start: cp .env.example .env & yarn workspace @app/condo start
-          wait-on: http://localhost:3000
-          wait-on-timeout: 500
-          record: true
-          parallel: true
-        env:
-          CYPRESS_RECORD_KEY: ad4215d6-094f-4dcb-8caf-dd6645c4ae02
+    #   - name: Makemigrations
+    #     run: yarn workspace @app/condo makemigrations
 
-    env:
-      NODE_ENV: development
-      DISABLE_LOGGING: true
-      WORKER_REDIS_URL: redis://localhost:6379
-      COOKIE_SECRET: doma.ai.secret
-      DATABASE_URL: postgresql://postgres:postgres@127.0.0.1/main
-      SERVER_URL: http://localhost:3000
-      # DEBUG: commit-info,cypress:server:record
+    #   - name: Migrate
+    #     run: yarn workspace @app/condo migrate
+
+    #   - name: Run cypress
+    #     uses: cypress-io/github-action@v2
+    #     with:
+    #       working-directory: apps/condo
+    #       build: yarn workspace @app/condo build
+    #       start: yarn workspace @app/condo start
+    #       wait-on: http://localhost:3000
+    #       wait-on-timeout: 500
+    #       record: true
+    #       parallel: true
+    #     env:
+    #       CYPRESS_RECORD_KEY: ad4215d6-094f-4dcb-8caf-dd6645c4ae02
+
+    # env:
+    #   NODE_ENV: development
+    #   DISABLE_LOGGING: true
+    #   WORKER_REDIS_URL: redis://localhost:6379
+    #   COOKIE_SECRET: doma.ai.secret
+    #   DATABASE_URL: postgresql://postgres:postgres@127.0.0.1/main
+    #   SERVER_URL: http://localhost:3000
+    #   # DEBUG: commit-info,cypress:server:record
