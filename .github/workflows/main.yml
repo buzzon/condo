@@ -38,7 +38,9 @@ jobs:
       #   run: yarn workspace @app/condo migrate
 
       - name: cp .env.test .env 
-        run: cp .env.test .env 
+        run: |
+          set -x  
+          cp .env.test .env 
             
       - name: Run cypress
         uses: cypress-io/github-action@v2
