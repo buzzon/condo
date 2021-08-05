@@ -42,8 +42,8 @@ jobs:
       - name: Makemigrations
         run: yarn workspace @app/condo makemigrations
 
-      - name: Migrate
-        run: yarn workspace @app/condo migrate
+      # - name: Migrate
+      #   run: yarn workspace @app/condo migrate
             
       - name: Run cypress
         uses: cypress-io/github-action@v2

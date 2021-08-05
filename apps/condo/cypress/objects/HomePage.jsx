@@ -2,8 +2,12 @@ import SignInPage from "./SignInPage";
 
 class HomePage {
   
+  static getUrl(){
+    return 'http://localhost:3000/'
+  }
+
   visit() {
-    cy.visit('http://localhost:3000/');
+    cy.visit(HomePage.getUrl());
   }
   
   // getUserAvatar() {

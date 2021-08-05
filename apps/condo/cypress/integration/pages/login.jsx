@@ -53,7 +53,7 @@ describe('Sign In', () => {
         .fillPhone(user.phone)
         .fillPassword(user.password)
         .submit();
-        cy.url().should('include', '/',)
+      cy.url().should('eq', HomePage.getUrl());
     })
   })
 })
