@@ -1,65 +1,63 @@
-import SignInPage from "./SignInPage";
 
 class RegistrationPage {
 
-    visit() {
-      const signIn = new SignInPage();
-      signIn.visit()
-      signIn.registration();
-      cy.url().should('include', '/auth/register',)
-    }
-  
-    fillPhone(value) {
-      const field = cy.get(`[data-testid=RegisterPhoneItem] input`)
-      field.clear()
-      field.type(value)
-      return this
-    }
+  static url = 'http://localhost:3000/auth/register/';
 
-    fillSMSCode(value) {
-      const field = cy.get(`[data-testid=RegisterSMSCodeItem] input`)
-      field.clear()
-      field.type(value)
-      return this
-    }
-    
-    fillFIO(value) {
-      const field = cy.get(`[data-testid=RegistrationFIOItem] input`)
-      field.clear()
-      field.type(value)
-      return this
-    }    
-
-    fillEmail(value) {
-      const field = cy.get(`[data-testid=RegistrationEmailItem] input`)
-      field.clear()
-      field.type(value)
-      return this
-    }
-        
-    fillPass(value) {
-      const field = cy.get(`[data-testid=RegistrationPasswordItem] input`)
-      field.clear()
-      field.type(value)
-      return this
-    }
-        
-    fillPass2(value) {
-      const field = cy.get(`[data-testid=RegistrationPassword2Item] input`)
-      field.clear()
-      field.type(value)
-      return this
-    }
-
-    submit() {
-      const button = cy.get(`[data-testid=RegisterSubmitButton]`)
-      button.click()
-    }
-
-    submit_second() {
-      const button = cy.get(`[data-testid=RegisterSubmitSecondButton]`)
-      button.click()
-    }
+  visit() {
+    cy.visit(RegistrationPage.url);
   }
-  
-  export default RegistrationPage
+
+  fillPhone(value) {
+    const field = cy.get(`[data-ci=register-phone-item] input`)
+    field.clear()
+    field.type(value)
+    return this
+  }
+
+  fillSMSCode(value) {
+    const field = cy.get(`[data-ci=register-smscode-item] input`)
+    field.clear()
+    field.type(value)
+    return this
+  }
+
+  fillFIO(value) {
+    const field = cy.get(`[data-ci=register-name-item] input`)
+    field.clear()
+    field.type(value)
+    return this
+  }
+
+  fillEmail(value) {
+    const field = cy.get(`[data-ci=register-email-item] input`)
+    field.clear()
+    field.type(value)
+    return this
+  }
+
+  fillPass(value) {
+    const field = cy.get(`[data-ci=register-password-item] input`)
+    field.clear()
+    field.type(value)
+    return this
+  }
+
+  fillPass2(value) {
+    const field = cy.get(`[data-ci=register-confirmpassword-item] input`)
+    field.clear()
+    field.type(value)
+    return this
+  }
+
+  submit() {
+    const button = cy.get(`[data-ci=register-button]`)
+    button.click()
+  }
+
+  submit_second() {
+    const button = cy.get(`[data-ci=registercomplete-button]`)
+    button.click()
+  }
+}
+
+export default RegistrationPage

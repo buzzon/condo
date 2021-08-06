@@ -122,6 +122,7 @@ const ChangePasswordPage: AuthPage = () => {
                             message: PasswordIsTooShortMsg,
                         },
                     ]}
+                    data-ci={'changepassword-password-item'}
                 >
                     <Input.Password style={INPUT_STYLE}/>
                 </Form.Item>
@@ -146,6 +147,7 @@ const ChangePasswordPage: AuthPage = () => {
                             },
                         }),
                     ]}
+                    data-ci={'changepassword-confirm-item'}
                 >
                     <Input.Password  style={INPUT_STYLE}/>
                 </Form.Item>
@@ -156,6 +158,7 @@ const ChangePasswordPage: AuthPage = () => {
                             type='sberPrimary'
                             loading={isLoading}
                             htmlType="submit"
+                            data-ci={'changepassword-button'}
                         >
                             {SaveMsg}
                         </Button>

@@ -274,12 +274,12 @@ const InputPhoneForm = ({ onFinish }): React.ReactElement<IInputPhoneFormProps> 
             >
 
                 <Form.Item
-                    data-testid="RegisterPhoneItem"
                     name='phone'
                     label={PhoneMsg}
                     labelAlign='left'
                     style={{ marginTop: '40px', textAlign: 'left' }}
                     labelCol={{ flex: 1 }}
+                    data-ci={'register-phone-item'}
                     rules={[
                         ...validations.phone,
                         () => ({
@@ -304,12 +304,12 @@ const InputPhoneForm = ({ onFinish }): React.ReactElement<IInputPhoneFormProps> 
                 </Typography.Paragraph>
                 <Form.Item style={{ textAlign: 'left', marginTop: '24px' }}>
                     <Button
-                        data-testid="RegisterSubmitButton"
                         key='submit'
                         type='sberPrimary'
                         htmlType='submit'
                         loading={isloading}
                         style={{ marginTop: '40px' }}
+                        data-ci={'register-button'}
                     >
                         {RegisterMsg}
                     </Button>
@@ -450,12 +450,12 @@ const ValidatePhoneForm = ({ onFinish, onReset }): React.ReactElement<IValidateP
                 </Typography.Paragraph>
 
                 <Form.Item
-                    data-testid="RegisterSMSCodeItem"
                     name='smsCode'
                     label={SmsCodeTitle}
                     labelAlign='left'
                     style={{ marginTop: '40px', textAlign: 'left' }}
                     labelCol={{ flex: 1 }}
+                    data-ci={'register-smscode-item'}
                     rules={[
                         {
                             required: true,
@@ -620,12 +620,12 @@ const RegisterForm = ({ onFinish }): React.ReactElement<IRegisterFormProps> => {
                     <PhoneInput disabled={true} placeholder={ExamplePhoneMsg} style={{ ...INPUT_STYLE }} />
                 </Form.Item>
                 <Form.Item
-                    data-testid="RegistrationFIOItem"
                     name='name'
                     label={NameMsg}
                     labelAlign='left'
                     style={{ marginTop: '24px', textAlign: 'left' }}
                     labelCol={{ flex: 1 }}
+                    data-ci={'register-name-item'}
                     rules={[{
                         required: true,
                         message: PleaseInputYourNameMsg,
@@ -645,12 +645,12 @@ const RegisterForm = ({ onFinish }): React.ReactElement<IRegisterFormProps> => {
                     <Input placeholder={ExampleNameMsg} style={INPUT_STYLE} />
                 </Form.Item>
                 <Form.Item
-                    data-testid="RegistrationEmailItem"
                     name='email'
                     label={EmailMsg}
                     labelAlign='left'
                     style={{ marginTop: '24px', textAlign: 'left' }}
                     labelCol={{ flex: 1 }}
+                    data-ci={'register-email-item'}
                     rules={[
                         {
                             type: 'email',
@@ -665,12 +665,12 @@ const RegisterForm = ({ onFinish }): React.ReactElement<IRegisterFormProps> => {
                     <Input autoComplete='chrome-off' placeholder={EmailPlaceholder} style={INPUT_STYLE} />
                 </Form.Item>
                 <Form.Item
-                    data-testid="RegistrationPasswordItem"
                     name='password'
                     label={PasswordMsg}
                     labelAlign='left'
                     style={{ marginTop: '24px', textAlign: 'left' }}
                     labelCol={{ flex: 1 }}
+                    data-ci={'register-password-item'}
                     rules={[
                         {
                             required: true,
@@ -685,12 +685,12 @@ const RegisterForm = ({ onFinish }): React.ReactElement<IRegisterFormProps> => {
                     <Input.Password autoComplete='new-password' style={INPUT_STYLE} />
                 </Form.Item>
                 <Form.Item
-                    data-testid="RegistrationPassword2Item"
                     name='confirm'
                     label={ConfirmPasswordMsg}
                     labelAlign='left'
                     style={{ marginTop: '24px', textAlign: 'left' }}
                     labelCol={{ flex: 1 }}
+                    data-ci={'register-confirmpassword-item'}
                     dependencies={['password']}
                     rules={[
                         {
@@ -711,7 +711,7 @@ const RegisterForm = ({ onFinish }): React.ReactElement<IRegisterFormProps> => {
                 </Form.Item>
                 <Form.Item style={{ textAlign: 'left', marginTop: '36px' }}>
                     <Button
-                        data-testid="RegisterSubmitSecondButton"
+                        data-ci={'registercomplete-button'}
                         key='submit'
                         onClick={onFinish}
                         type='sberPrimary'

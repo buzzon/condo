@@ -51,7 +51,7 @@ const ResetPage: AuthPage = () => {
     }
     if (isSuccessMessage) {
         return (
-            <div style={{ textAlign: 'left' }}>
+            <Typography.Paragraph style={{ textAlign: 'left' }} data-ci={'forgot-success-message'}>
                 <Typography.Title>{CheckEmailMsg}</Typography.Title>
                 <Typography.Paragraph>
                     <FormattedMessage id='pages.auth.reset.ResetSuccessMessage' values={{ email: form.getFieldValue('email') }} />
@@ -59,7 +59,7 @@ const ResetPage: AuthPage = () => {
                 <Typography.Paragraph>
                     <a style={LINK_STYLE} onClick={() => Router.push('/auth/signin')}>{ReturnToLoginPage}</a>
                 </Typography.Paragraph>
-            </div>
+            </Typography.Paragraph>
         )
     }
 
@@ -100,6 +100,7 @@ const ResetPage: AuthPage = () => {
                 colon={false}
                 style={{ marginTop: '40px' }}
                 requiredMark={false}
+                data-ci={'forgot-email-item'}
             >
                 <Form.Item
                     name='email'
@@ -137,6 +138,7 @@ const ResetPage: AuthPage = () => {
                                     loading={isLoading}
                                     htmlType='submit'
                                     style={{ marginTop: '24px' }}
+                                    data-ci={'forgot-button'}
                                 >
                                     {isCountDownActive ? `${RestorePasswordMsg} ${countdown}` : RestorePasswordMsg}
                                 </Button>

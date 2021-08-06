@@ -93,7 +93,7 @@ const SignInForm = (): React.ReactElement => {
             requiredMark={false}
         >
             <Form.Item
-                data-testid="SignInPhoneItem"
+                data-ci={'signin-phone-item'}
                 name="phone"
                 label={PhoneMsg}
                 labelAlign='left'
@@ -104,7 +104,7 @@ const SignInForm = (): React.ReactElement => {
             </Form.Item>
 
             <Form.Item
-                data-testid="SignInPasswordItem"
+                data-ci={'signin-password-item'}
                 name="password"
                 label={PasswordMsg}
                 labelAlign='left'
@@ -117,7 +117,7 @@ const SignInForm = (): React.ReactElement => {
 
             <div style={{ paddingTop: '4em', display: 'flex', justifyContent: 'space-between', width: '100%' }}>
                 <Button
-                    data-testid="SignInSubmitButton"
+                    data-ci={'signin-button'}
                     key='submit'
                     type='sberPrimary'
                     htmlType="submit"

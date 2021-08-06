@@ -13,7 +13,7 @@ describe('Sign In new user', () => {
       registration
         .fillSMSCode(user.sms)
       registration
-        .fillFIO(user.fio)
+        .fillFIO(user.name)
         .fillEmail(user.email)
         .fillPass(user.password)
         .fillPass2(user.password)
