@@ -39,8 +39,8 @@ jobs:
       - name: Docker compose up databases
         run: docker-compose up -d postgresdb redis
 
-      # - name: Makemigrations
-      #   run: yarn workspace @app/condo makemigrations
+      - name: Makemigrations
+        run: yarn workspace @app/condo makemigrations
 
       - name: Migrate
         run: yarn workspace @app/condo migrate
